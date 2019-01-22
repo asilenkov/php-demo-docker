@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label "jx-base"
+    label "jenkins-jx-base"
   }
   environment {
     ORG = 'sn00p'
