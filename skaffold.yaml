@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: php-demo-docker
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: asilenkov
+        chartPath: charts/asilenkov
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov'
+          image.tag: '{{.DIGEST_HEX}}'
