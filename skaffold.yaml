@@ -7,7 +7,7 @@ build:
     docker: {}
   tagPolicy:
     envTemplate:
-      template: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov:{{.VERSION}}'
+      template: '{{.DOCKER_REGISTRY}}/sn00p/php-demo-docker:{{.VERSION}}'
   local: {}
 deploy:
   kubectl: {}
@@ -18,13 +18,13 @@ profiles:
     - docker: {}
     tagPolicy:
       envTemplate:
-        template: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov:{{.DIGEST_HEX}}'
+        template: '{{.DOCKER_REGISTRY}}/sn00p/php-demo-docker:{{.DIGEST_HEX}}'
     local: {}
   deploy:
     helm:
       releases:
-      - name: asilenkov
-        chartPath: charts/asilenkov
+      - name: php-demo-docker
+        chartPath: charts/php-demo-docker
         setValueTemplates:
-          image.repository: '{{.DOCKER_REGISTRY}}/sn00p/asilenkov'
+          image.repository: '{{.DOCKER_REGISTRY}}/sn00p/php-demo-docker'
           image.tag: '{{.DIGEST_HEX}}'

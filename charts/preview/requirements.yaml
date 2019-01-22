@@ -13,4 +13,4 @@ dependencies:
   # !! Place custom dependencies above !!
 - alias: preview
   name: asilenkov
-  repository: file://../asilenkov
+  repository: file://../php-demo-docker
